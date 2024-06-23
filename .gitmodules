@@ -1,6 +1,7 @@
 [submodule "tailscale"]
 	path = tailscale
 	url = https://github.com/tailscale/tailscale.git
+	branch = main
 [submodule "TARGET_FOLDER"]
 	path = TARGET_FOLDER
 	url = https://github.com/tailscale/tailscale.git
