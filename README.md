@@ -29,6 +29,6 @@ docker run -e DERP_DOMAIN=derper.your-domain.com -p 80:80 -p 443:443 -p 3478:347
    
 完整的DERP官方文档请查看: https://tailscale.com/kb/1118/custom-derp-servers/
 
-## 客户端验证
+## 客户端验证(防白嫖)
 
 如果使用了 `DERP_VERIFY_CLIENTS`, 容器需要访问 Tailscale 本地 API, 通过访问此sock文件 `/var/run/tailscale/tailscaled.sock`. 如果你运行了 Tailscale 服务, 需要给 `docker run` 命令添加此参数 `-v /var/run/tailscale/tailscaled.sock:/var/run/tailscale/tailscaled.sock`
