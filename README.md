@@ -23,8 +23,9 @@ docker run -e DERP_DOMAIN=derper.your-domain.com -p 80:80 -p 443:443 -p 3478:347
 | DERP_HTTP_PORT      | false    | DERP HTTP端口. 设置-1为禁用                                             | 80                |
 | DERP_VERIFY_CLIENTS | false    | DERP客户端证书验证(防白嫖)                                               | false             |
 
-# 用法
+# 更多文档
 
+我的个人博客: https://www.runyf.cn/archives/440/
 完整的DERP官方文档请查看: https://tailscale.com/kb/1118/custom-derp-servers/
 
 ## 客户端验证
