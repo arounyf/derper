@@ -4,29 +4,29 @@
 [![docker pulls](https://img.shields.io/docker/pulls/runyf/derper.svg?color=brightgreen)](https://hub.docker.com/r/runyf/derper)
 [![platfrom](https://img.shields.io/badge/platform-amd64%20%7C%20arm64-brightgreen)](https://hub.docker.com/r/runyf/derper/tags)
 
-# Setup
+# 配置
 
-> required: set env `DERP_DOMAIN` to your domain
+> 设置 `DERP_DOMAIN` 参数为你的域名
 
 ```bash
-docker run -e DERP_DOMAIN=derper.your-domain.com -p 80:80 -p 443:443 -p 3478:3478/udp fredliang/derper
+docker run -e DERP_DOMAIN=derper.your-domain.com -p 80:80 -p 443:443 -p 3478:3478/udp runyf/derper
 ```
 
-| env                 | required | description                                                            | default value     |
+| 参数                |   必须   | 描述                                                                   |        默认值      |
 | ------------------- | -------- | ---------------------------------------------------------------------- | ----------------- |
-| DERP_DOMAIN         | true     | derper server hostname                                                 | your-hostname.com |
-| DERP_CERT_DIR       | false    | directory to store LetsEncrypt certs(if addr's port is :443)           | /app/certs        |
-| DERP_CERT_MODE      | false    | mode for getting a cert. possible options: manual, letsencrypt         | letsencrypt       |
-| DERP_ADDR           | false    | listening server address                                               | :443              |
-| DERP_STUN           | false    | also run a STUN server                                                 | true              |
-| DERP_STUN_PORT      | false    | The UDP port on which to serve STUN.                                   | 3478              |
-| DERP_HTTP_PORT      | false    | The port on which to serve HTTP. Set to -1 to disable                  | 80                |
-| DERP_VERIFY_CLIENTS | false    | verify clients to this DERP server through a local tailscaled instance | false             |
+| DERP_DOMAIN         | true     | 域名                                                                   | your-hostname.com |
+| DERP_CERT_DIR       | false    | 证书保存目录                                                            | /app/certs        |
+| DERP_CERT_MODE      | false    | 证书模式. 可选: manual, letsencrypt                                     | letsencrypt       |
+| DERP_ADDR           | false    | 服务监听端口                                                            | :443              |
+| DERP_STUN           | false    | 仅运行STUN服务                                                          | true              |
+| DERP_STUN_PORT      | false    | STUN服务UDP端口号                                                       | 3478              |
+| DERP_HTTP_PORT      | false    | DERP HTTP端口. 设置-1为禁用                                             | 80                |
+| DERP_VERIFY_CLIENTS | false    | DERP客户端证书验证(防白嫖)                                               | false             |
 
-# Usage
+# 用法
 
-Fully DERP setup offical documentation: https://tailscale.com/kb/1118/custom-derp-servers/
+完整的DERP官方文档请查看: https://tailscale.com/kb/1118/custom-derp-servers/
 
-## Client verification
+## 客户端验证
 
-In order to use `DERP_VERIFY_CLIENTS`, the container needs access to Tailscale's Local API, which can usually be accessed through `/var/run/tailscale/tailscaled.sock`. If you're running Tailscale bare-metal on Linux, adding this to the `docker run` command should be enough: `-v /var/run/tailscale/tailscaled.sock:/var/run/tailscale/tailscaled.sock`
+如果使用了 `DERP_VERIFY_CLIENTS`, 容器需要访问 Tailscale 本地 API, 通过访问此sock文件 `/var/run/tailscale/tailscaled.sock`. 如果你运行了 Tailscale 服务, 需要给 `docker run` 命令添加此参数 `-v /var/run/tailscale/tailscaled.sock:/var/run/tailscale/tailscaled.sock`
