@@ -1,0 +1,15 @@
+services:
+  derper:
+    image: runyf/derper:v1.70.0
+    container_name: derper
+    restart: always
+    network_mode: host
+    volumes:
+      - /root/derper/certs/:/app/certs
+      - /var/run/tailscale/:/var/run/tailscale/
+    environment:
+      DERP_CERT_MODE: manual
+      DERP_HTTP_PORT: -1
+      DERP_ADDR: :12340
+      DERP_DOMAIN: nb.runyf.cn
+      DERP_VERIFY_CLIENTS: true
