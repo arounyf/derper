@@ -10,5 +10,5 @@ services:
     environment:
       DERP_CERT_MODE: manual
       DERP_ADDR: :12340
-      DERP_DOMAIN: nb.runyf.cn
+      DERP_DOMAIN: runyf.cn
       DERP_VERIFY_CLIENTS: true
