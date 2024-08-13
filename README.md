@@ -20,7 +20,6 @@ docker run -e DERP_DOMAIN=derper.your-domain.com -p 80:80 -p 443:443 -p 3478:347
 | DERP_ADDR           | false    | 服务监听端口                                                            | :443              |
 | DERP_STUN           | false    | 仅运行STUN服务                                                          | true              |
 | DERP_STUN_PORT      | false    | STUN服务UDP端口号                                                       | 3478              |
-| DERP_HTTP_PORT      | false    | DERP HTTP端口. 设置-1为禁用                                             | 80                |
 | DERP_VERIFY_CLIENTS | false    | DERP客户端证书验证(防白嫖)                                               | false             |
 
 # 更多文档
