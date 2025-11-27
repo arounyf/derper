@@ -35,8 +35,10 @@ jobs:
         with:
           images: runyf/derper  
           tags: |
-            # 只保留 'latest' 标签
+            # 保留 latest 标签（仅主分支）
             type=raw,value=latest,enable={{is_default_branch}}
+            # 添加基于 Git 短 SHA 的标签（所有推送都会生成）
+            type=sha,format=short,prefix=sha-
 
       - name: Build and push Docker image
         uses: docker/build-push-action@v5
