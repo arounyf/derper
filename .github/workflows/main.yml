@@ -1,9 +1,21 @@
 name: Build and Push Docker Image
 
 on:
+  # 推送到 main 分支（触发 latest 标签）
   push:
     branches: [ main ]
+    paths: [ 'Dockerfile' ]
+  # 推送标签（触发版本标签，如 v1.92.0）
+  push:
     tags: [ 'v*' ]
+  # 保留手动触发选项
+  workflow_dispatch:
+    inputs:
+      tailscale_branch:
+        description: 'Tailscale branch to build'
+        required: true
+        default: 'main'
+        type: string
 
 jobs:
   build:
@@ -25,12 +37,12 @@ jobs:
         id: meta
         uses: docker/metadata-action@v5
         with:
-          images: runyf/hs-admin
+          images: runyf/derper  # 替换为你的 Docker Hub 仓库名
           tags: |
-            # 推送标签时，使用标签名作为镜像标签（如 v1.0.0）
+            # 推送标签时：使用标签名作为镜像标签（如 v1.92.0）
             type=ref,event=tag
-            # 推送 main 分支时，使用 latest 标签
-            type=raw,value=latest,enable={{ github.ref == 'refs/heads/main' }}
+            # 推送到 main 分支时：使用 latest 标签（仅 main 分支触发）
+            type=raw,value=latest,enable={{is_default_branch}}
 
       - name: Build and push
         uses: docker/build-push-action@v5
@@ -39,3 +51,5 @@ jobs:
           push: true
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
+          build-args:
+            TAILSCALE_BRANCH=${{ github.event.inputs.tailscale_branch || 'main' }}
