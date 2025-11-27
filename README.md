@@ -9,8 +9,28 @@
 > 设置 `DERP_DOMAIN` 参数为你的域名
 
 ```bash
-docker run -e DERP_DOMAIN=derper.your-domain.com -p 80:80 -p 443:443 -p 3478:3478/udp runyf/derper
+docker run -e DERP_DOMAIN=derper.your-domain.com -p 80:80 -p 443:443 -p 3478:3478/udp runyf/derper:latest
 ```
+
+# docker-compose
+```shell
+services:
+  derper:
+    image: runyf/derper:latest
+    container_name: derper
+    restart: always
+    network_mode: host
+    volumes:
+      - /root/derper/certs/:/app/certs
+      - /var/run/tailscale/:/var/run/tailscale/
+    environment:
+      DERP_CERT_MODE: manual
+      DERP_ADDR: :12345
+      DERP_DOMAIN: hs-admin
+      DERP_VERIFY_CLIENTS: false
+
+```
+
 
 | 参数                |   必须   | 描述                                                                   |        默认值      |
 | ------------------- | -------- | ---------------------------------------------------------------------- | ----------------- |
