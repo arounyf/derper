@@ -8,7 +8,6 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -28,10 +27,10 @@ jobs:
         with:
           images: runyf/hs-admin
           tags: |
-            # 当推送标签时，使用标签名作为镜像标签 (例如 v1.92.0)
+            # 推送标签时，使用标签名作为镜像标签（如 v1.0.0）
             type=ref,event=tag
-            # 当推送到默认分支 (main) 时，使用 latest 标签
-            type=raw,value=latest,enable={{is_default_branch}}
+            # 推送 main 分支时，使用 latest 标签
+            type=raw,value=latest,enable={{ github.ref == 'refs/heads/main' }}
 
       - name: Build and push
         uses: docker/build-push-action@v5
