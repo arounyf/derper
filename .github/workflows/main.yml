@@ -46,7 +46,7 @@ jobs:
         uses: docker/metadata-action@v5
         with:
           # 替换为你的 Docker Hub 用户名和仓库名 (例如: username/derper)
-          images: your-dockerhub-username/derper
+          images: runyf/derper
           # 定义镜像标签的生成规则
           tags: |
             # 生成一个基于 Git 提交 SHA 的标签 (例如: sha-abc1234)

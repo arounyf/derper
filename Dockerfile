@@ -15,7 +15,8 @@ ARG TAILSCALE_BRANCH=main
 
 # 使用 git clone 拉取指定分支的 Tailscale 代码库
 RUN git clone -b v1.92.0 https://github.com/tailscale/tailscale.git /app/tailscale
-#
+
+
 # 编译 derper (你的原始编译命令保持不变)
 RUN cd /app/tailscale/cmd/derper && \
     CGO_ENABLED=0 /usr/local/go/bin/go build -buildvcs=false -ldflags "-s -w" -o /app/derper && \
