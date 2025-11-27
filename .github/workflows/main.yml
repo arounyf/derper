@@ -1,10 +1,15 @@
 name: Build and Push Docker Image
 
 on:
+  # 当推送到 main 分支且修改了 Dockerfile 时触发
   push:
     branches: [ main ]
     paths:
       - 'Dockerfile'
+  # 当创建新的 Git 标签时触发
+  create:
+    tags: true
+  # 保留手动触发的选项
   workflow_dispatch:
     inputs:
       tailscale_branch:
@@ -34,11 +39,12 @@ jobs:
         uses: docker/metadata-action@v5
         with:
           images: runyf/derper
+          # 配置标签生成规则
           tags: |
-            # 保留 'latest' 标签
-            type=raw,value=latest,enable={{is_default_branch}}
-            # 添加自定义的 'stable' 标签
-            type=raw,value=stable,enable={{is_default_branch}}
+            # 规则一：如果是推送到 main 分支，生成 'latest' 标签
+            type=raw,value=latest,enable={{ github.event_name == 'push' && github.ref == 'refs/heads/main' }}
+            # 规则二：如果是创建标签事件，直接使用 Git 标签作为 Docker 标签
+            type=ref,event=tag
 
       - name: Build and push Docker image
         uses: docker/build-push-action@v5
@@ -48,4 +54,5 @@ jobs:
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
           build-args: |
+            # 如果是手动触发，可以指定 tailscale_branch，否则默认使用 'main'
             TAILSCALE_BRANCH=${{ github.event.inputs.tailscale_branch || 'main' }}
