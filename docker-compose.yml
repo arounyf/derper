@@ -1,6 +1,6 @@
 services:
   derper:
-    image: runyf/derper:v1.70.0
+    image: runyf/derper:latest
     container_name: derper
     restart: always
     network_mode: host
