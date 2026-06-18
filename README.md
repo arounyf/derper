@@ -1,5 +1,7 @@
 # Derper
 
+基于 [Tailscale v1.100.0](https://github.com/tailscale/tailscale/releases/tag/v1.100.0) 的 `cmd/derper`，Docker 一键部署 DERP 中继服务器。
+
 [![docker workflow](https://github.com/fredliang44/derper-docker/actions/workflows/docker-image.yml/badge.svg)](https://hub.docker.com/r/runyf/derper)
 [![docker pulls](https://img.shields.io/docker/pulls/runyf/derper.svg?color=brightgreen)](https://hub.docker.com/r/runyf/derper)
 [![platfrom](https://img.shields.io/badge/platform-amd64%20%7C%20arm64-brightgreen)](https://hub.docker.com/r/runyf/derper/tags)

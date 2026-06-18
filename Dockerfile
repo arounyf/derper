@@ -11,10 +11,10 @@ RUN apt-get update && \
     rm -rf /var/lib/apt/lists/*
 
 # 定义一个构建参数，用于指定要克隆的 Tailscale 分支
-ARG TAILSCALE_BRANCH=main
+ARG TAILSCALE_VERSION=v1.100.0
 
 # 使用 git clone 拉取指定分支的 Tailscale 代码库
-RUN git clone -b v1.96.5 https://github.com/tailscale/tailscale.git /app/tailscale
+RUN git clone -b v1.100.0 https://github.com/tailscale/tailscale.git /app/tailscale
 
 #
 # 编译 derper (你的原始编译命令保持不变)
